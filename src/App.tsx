@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import axios from "axios";
 import {
   Calendar,
-  Clock,
-  Users,
-  Zap,
-  Brain,
-  Target,
-  Star,
   CheckCircle,
-  User,
-  MessageCircle,
-  Award,
-  TrendingUp,
+  Clock,
+  Users
 } from "lucide-react";
-import logo from "./assets/imgs/logomentoria.jpg";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { FaWhatsapp } from "react-icons/fa6";
-import mentora from "./assets/imgs/mentora.jpg";
+import React, { useState } from "react";
 import { CiStar } from "react-icons/ci";
+import { FaWhatsapp } from "react-icons/fa6";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import logo from "./assets/imgs/logomentoria.jpg";
+import mentora from "./assets/imgs/mentora.jpg";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -37,19 +30,35 @@ function App() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
+      // const response = await fetch(
+      //   "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
+      //   {
+
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(formData),
+      //   }
+      // );
+      // console.log(response);
+      // if (response.ok) {
+      //   alert(
+      //     "Inscrição realizada com sucesso! Você receberá mais informações em breve."
+      //   );
+      // } else {
+      //   alert("Houve um erro ao enviar o formulário.");
+      // }
+
+      console.log(formData);
+      console.log("Enviando dados para a API...");
+
+      const response = await axios.post(
         "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
-        {
-        
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
+        formData
       );
       console.log(response);
-      if (response.ok) {
+      if (response.status === 200) {
         alert(
           "Inscrição realizada com sucesso! Você receberá mais informações em breve."
         );
@@ -170,7 +179,7 @@ function App() {
           </div>
 
           {/* Registration Form */}
-          <div className=" w-auto mx-auto bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+          <div className="max-w-4xl m-auto bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
             <div className="logo flex flex-col md:flex-row align-center items-center justify-center mb-10">
               <img src={logo} alt="" className="h-20" />
               <h3 className="text-3xl font-bold text-center text-gray-900 mb-6">
