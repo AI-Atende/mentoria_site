@@ -47,7 +47,7 @@ function App() {
 
       const payload = {
         ...formData,
-        utmParams,
+        utms: utmParams,
       }
 
       const response = await axios.post(
