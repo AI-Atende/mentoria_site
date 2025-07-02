@@ -16,7 +16,7 @@ function App() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    whatsapp: "",
+    phone: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,35 +30,11 @@ function App() {
     e.preventDefault();
 
     try {
-      // const response = await fetch(
-      //   "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
-      //   {
-
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(formData),
-      //   }
-      // );
-      // console.log(response);
-      // if (response.ok) {
-      //   alert(
-      //     "Inscrição realizada com sucesso! Você receberá mais informações em breve."
-      //   );
-      // } else {
-      //   alert("Houve um erro ao enviar o formulário.");
-      // }
-
-      console.log(formData);
-      console.log("Enviando dados para a API...");
-
       const response = await axios.post(
         "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
         formData
       );
-      console.log(response);
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         alert(
           "Inscrição realizada com sucesso! Você receberá mais informações em breve."
         );
@@ -232,17 +208,17 @@ function App() {
 
               <div>
                 <label
-                  htmlFor="whatsapp"
+                  htmlFor="phone"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   WhatsApp *
                 </label>
                 <input
                   type="tel"
-                  id="whatsapp"
-                  name="whatsapp"
+                  id="phone"
+                  name="phone"
                   required
-                  value={formData.whatsapp}
+                  value={formData.phone}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="(11) 99999-9999"
