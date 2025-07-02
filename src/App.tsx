@@ -31,7 +31,6 @@ function App() {
     });
 
     setUtmParams(allParams);
-    console.log(allParams);
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
