@@ -1,16 +1,17 @@
 import axios from "axios";
-import {
-  Calendar,
-  CheckCircle,
-  Clock,
-  Users
-} from "lucide-react";
+import { Calendar, CheckCircle, Clock, Users } from "lucide-react";
 import React, { useState } from "react";
-import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import logo from "./assets/imgs/logomentoria.jpg";
 import mentora from "./assets/imgs/mentora.jpg";
+
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
 
 function App() {
   const [formData, setFormData] = useState({
@@ -34,10 +35,20 @@ function App() {
         "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
         formData
       );
+
       if (response.status === 200 || response.status === 201) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "form_success",
+          form_name: "mentoria360",
+        });
+
         alert(
-          "Inscrição realizada com sucesso! Você receberá mais informações em breve."
+          "Inscrição realizada com sucesso! Você será redirecionado para o grupo VIP do WhatsApp."
         );
+
+        window.location.href = "https://chat.whatsapp.com/C89u16aLGP8LL2sjPBTlYw?mode=r_t";
+        
       } else {
         alert("Houve um erro ao enviar o formulário.");
       }
@@ -46,7 +57,6 @@ function App() {
       alert("Erro ao enviar o formulário. Tente novamente mais tarde.");
     }
   };
-
   const learningTopics = [
     {
       icon: <IoMdCheckmarkCircleOutline className="w-8 h-8 text-green-600" />,
@@ -277,7 +287,14 @@ function App() {
               </span>
             </p>
             <div className="btn">
-              <button className="mt-[10px] bg-gradient-to-r from-green-700 to-green-700 text-white font-bold py-4 px-6 rounded-lg hover:from-green-800 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg text-lg">
+              <button
+                className="mt-[10px] bg-gradient-to-r from-green-700 to-green-700 text-white font-bold py-4 px-6 rounded-lg hover:from-green-800 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg text-lg"
+                onClick={() =>
+                  document
+                    .querySelector("form")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
                 ✅ Garantir Minha Vaga Agora!
               </button>
             </div>
@@ -308,7 +325,14 @@ function App() {
             ))}
           </div>
           <div className="btn flex align-center justify-center items-center">
-            <button className="flex align-center justify-center items-center mt-[30px] bg-gradient-to-r from-green-500 to-green-500 text-white font-bold py-4 px-6 rounded-lg hover:from-green-800 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg text-lg">
+            <button
+              className="flex align-center justify-center items-center mt-[30px] bg-gradient-to-r from-green-500 to-green-500 text-white font-bold py-4 px-6 rounded-lg hover:from-green-800 hover:to-green-800 transform hover:scale-105 transition-all duration-200 shadow-lg text-lg"
+              onClick={() =>
+                document
+                  .querySelector("form")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
               <FaWhatsapp className="mr-[15px] h-[30px]" /> Quero o convite ao
               grupo WhatsApp
             </button>
@@ -375,7 +399,11 @@ function App() {
                 <div className="flex-shrink-0"></div>
                 <div>
                   <div className="star flex align-center justify-center ">
-                    <CiStar className="bg-yellow-400" />
+                    <FaStar className="text-yellow-400 " />
+                    <FaStar className="text-yellow-400 " />
+                    <FaStar className="text-yellow-400 " />
+                    <FaStar className="text-yellow-400 " />
+                    <FaStar className="text-yellow-400 " />
                   </div>
                   <blockquote className="text-lg text-center text-[2px] italic text-gray-700 mb-3">
                     "Em apenas uma semana aplicando as técnicas da Mentoria
