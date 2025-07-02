@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Calendar, CheckCircle, Clock, Users } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
@@ -20,6 +20,20 @@ function App() {
     phone: "",
   });
 
+  const [utmParams, setUtmParams] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const allParams: Record<string, string> = {};
+
+    searchParams.forEach((value, key) => {
+      allParams[key] = value;
+    });
+
+    setUtmParams(allParams);
+    console.log(allParams);
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -31,9 +45,15 @@ function App() {
     e.preventDefault();
 
     try {
+
+      const payload = {
+        ...formData,
+        utmParams,
+      }
+
       const response = await axios.post(
         "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
-        formData
+        payload
       );
 
       if (response.status === 200 || response.status === 201) {
@@ -47,8 +67,8 @@ function App() {
           "Inscrição realizada com sucesso! Você será redirecionado para o grupo VIP do WhatsApp."
         );
 
-        window.location.href = "https://chat.whatsapp.com/C89u16aLGP8LL2sjPBTlYw?mode=r_t";
-        
+        window.location.href =
+          "https://chat.whatsapp.com/C89u16aLGP8LL2sjPBTlYw?mode=r_t";
       } else {
         alert("Houve um erro ao enviar o formulário.");
       }
