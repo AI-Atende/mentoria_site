@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import logo from "./assets/imgs/logomentoria.jpg";
+
 import mentora from "./assets/imgs/mentora.jpg";
 
 declare global {
@@ -14,6 +14,7 @@ declare global {
 }
 
 function App() {
+  const [croConsent, setCroConsent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,11 +45,11 @@ function App() {
     e.preventDefault();
 
     try {
-
       const payload = {
         ...formData,
         utms: utmParams,
-      }
+        croConsent,
+      };
 
       const response = await axios.post(
         "https://mentoria360.aiatende.dev.br/julianaleite/v1/api/register",
@@ -139,13 +140,6 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-red-100 border border-red-300 rounded-full px-4 py-2 mb-6">
-              <Users className="w-4 h-4 text-red-600 mr-2" />
-              <span className="text-red-600 font-semibold text-sm uppercase tracking-wide">
-                Vagas Limitadas: Apenas 100 Participantes!
-              </span>
-            </div>
-
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Descubra como <span className="text-blue-600">Triplicar</span>{" "}
               Seus
@@ -158,12 +152,8 @@ function App() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Triplique Seus Agendamentos em Clínicas Odontológicas com
-              <span className="font-semibold text-blue-600">
-                {" "}
-                IA e Automação
-              </span>{" "}
-              sem a necessidade de grandes equipes
+              Exclusivo para Dentistas <br/> Como usar a IA para Triplicar
+              seus Atendimentos.
             </p>
 
             <div className="bg-yellow-100 border-2 border-yellow-300 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
@@ -185,12 +175,7 @@ function App() {
 
           {/* Registration Form */}
           <div className="max-w-4xl m-auto bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
-            <div className="logo flex flex-col md:flex-row align-center items-center justify-center mb-10">
-              <img src={logo} alt="" className="h-20" />
-              <h3 className="text-3xl font-bold text-center text-gray-900 mb-6">
-                Mentoria Atende 360: Domine <br /> Agendamentos Automáticos
-              </h3>
-            </div>
+            <div className="logo flex flex-col md:flex-row align-center items-center justify-center mb-10"></div>
             <div className="text p-10 mt-[-80px]">
               <h4 className="text-center text-gray-600">
                 Inscreva-se agora para garantir sua vaga!
@@ -260,6 +245,22 @@ function App() {
               >
                 🚀 Quero Participar do Grupo VIP
               </button>
+              <div className="flex items-start space-x-2">
+                {" "}
+                <input
+                  type="checkbox"
+                  id="croConsent"
+                  name="croConsent"
+                  checked={croConsent}
+                  onChange={(e) => setCroConsent(e.target.checked)}
+                  required
+                  className="mt-1"
+                />{" "}
+                <label htmlFor="croConsent" className="text-sm text-gray-700">
+                  Sou dentista com CRO ativo e autorizo a verificação do meu
+                  registro profissional.
+                </label>
+              </div>
             </form>
 
             <p className="text-xs text-gray-500 text-center mt-4">
