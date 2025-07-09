@@ -243,6 +243,7 @@ function App() {
                 name="croConsent"
                 checked={croConsent}
                 onChange={(e) => setCroConsent(e.target.checked)}
+                required
                 className="gap-2 mt-1 w-6 h-6 scale-20"
               />{" "}
               <label htmlFor="croConsent" className="text-sm text-gray-700 ml-[12px]">
