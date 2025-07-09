@@ -152,8 +152,8 @@ function App() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Exclusivo para Dentistas <br/> Como usar a IA para Triplicar
-              seus Atendimentos.
+              Exclusivo para Dentistas <br /> Como usar a IA para Triplicar seus
+              Atendimentos.
             </p>
 
             <div className="bg-yellow-100 border-2 border-yellow-300 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
@@ -200,7 +200,6 @@ function App() {
                   placeholder="Seu Nome"
                 />
               </div>
-
               <div>
                 <label
                   htmlFor="email"
@@ -219,7 +218,6 @@ function App() {
                   placeholder="seuemail@exemplo.com"
                 />
               </div>
-
               <div>
                 <label
                   htmlFor="phone"
@@ -237,30 +235,29 @@ function App() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   placeholder="(11) 99999-9999"
                 />
+              </div>{" "}
+              <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="croConsent"
+                name="croConsent"
+                checked={croConsent}
+                onChange={(e) => setCroConsent(e.target.checked)}
+                className="gap-2 mt-1 w-6 h-6 scale-20"
+              />{" "}
+              <label htmlFor="croConsent" className="text-sm text-gray-700 ml-[12px]">
+                Sou dentista com CRO ativo e autorizo a verificação do meu
+                registro profissional.
+              </label>
               </div>
-
               <button
+              formTarget="blank"
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-4 px-6 rounded-lg hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-200 shadow-lg text-lg"
               >
                 🚀 Quero Participar do Grupo VIP
               </button>
-              <div className="flex items-start space-x-2">
-                {" "}
-                <input
-                  type="checkbox"
-                  id="croConsent"
-                  name="croConsent"
-                  checked={croConsent}
-                  onChange={(e) => setCroConsent(e.target.checked)}
-                  required
-                  className="mt-1"
-                />{" "}
-                <label htmlFor="croConsent" className="text-sm text-gray-700">
-                  Sou dentista com CRO ativo e autorizo a verificação do meu
-                  registro profissional.
-                </label>
-              </div>
+              <div className="flex items-start space-x-2"></div>
             </form>
 
             <p className="text-xs text-gray-500 text-center mt-4">
